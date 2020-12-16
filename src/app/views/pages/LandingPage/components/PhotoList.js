@@ -1,0 +1,69 @@
+import React, { memo } from 'react';
+import styled from 'styled-components';
+import { Card, Grid, Typography } from '@material-ui/core';
+import { useQuery } from '@apollo/client';
+import TestQueries from 'graphql/queries/Test';
+import LoadingIndicator from 'app/views/components/common/LoadingIndicator';
+import FeaturedTestsSkeleton from '../../../components/Skeletons/FeaturedTestsSkeleton';
+import TestCardItemSkeleton from 'app/views/components/Skeletons/TestCardItemSkeleton';
+
+const TestCardItem = React.lazy(() => import('app/views/components/Photo/PhotoCardItem'));
+
+const Wrapper = styled(Grid)`
+	width: 100%;
+	background: white;
+	align-items: center;
+	padding: 15px;
+	margin-bottom: 15px;
+	margin-top: 50px;
+`;
+
+const TestListContainer = styled(Grid)`
+	align-items: center;
+`;
+
+const ErrorText = styled(Typography)`
+	text-align: center;
+`;
+
+function PhotoList(props) {
+	const { lowPadding = false, wrapperStyle } = props;
+	const getTestRes = useQuery(TestQueries.GET_TESTS, { variables: { offset: 0, limit: 4 } });
+	const { data, error, loading } = getTestRes;
+
+	if (error) {
+		return (
+			<Wrapper style={wrapperStyle} lowpadding={lowPadding.toString()} elevation={4}>
+				{loading && <FeaturedTestsSkeleton></FeaturedTestsSkeleton>}
+				{!data && !loading && (
+					<ErrorText color="error" variant="h6" component="p">
+						No photos found
+					</ErrorText>
+				)}
+				{error && (
+					<ErrorText color="error" variant="h6" component="p">
+						Something went wrong, please try again later
+					</ErrorText>
+				)}
+			</Wrapper>
+		);
+	}
+
+	return (
+		<Wrapper style={wrapperStyle} lowpadding={lowPadding.toString()} elevation={3}>
+			<TestListContainer container>
+				{loading && <FeaturedTestsSkeleton></FeaturedTestsSkeleton>}
+				{data &&
+					data.tests.map((test, idx) => (
+						<Grid item xs={12} sm={6} key={idx}>
+							<React.Suspense fallback={<TestCardItemSkeleton />}>
+								<TestCardItem testId={test.id} title={test.title} rating={test.rating}></TestCardItem>
+							</React.Suspense>
+						</Grid>
+					))}
+			</TestListContainer>
+		</Wrapper>
+	);
+}
+
+export default memo(PhotoList);
