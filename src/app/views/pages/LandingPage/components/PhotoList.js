@@ -4,7 +4,7 @@ import { Card, Grid, Typography } from '@material-ui/core';
 import { useQuery } from '@apollo/client';
 import PhotoQueries from 'graphql/queries/Photo';
 import LoadingIndicator from 'app/views/components/common/LoadingIndicator';
-import FeaturedTestsSkeleton from '../../../components/Skeletons/FeaturedTestsSkeleton';
+import PhotosSkeleton from '../../../components/Skeletons/PhotosSkeleton';
 import TestCardItemSkeleton from 'app/views/components/Skeletons/TestCardItemSkeleton';
 
 const TestCardItem = React.lazy(() => import('app/views/components/Photo/PhotoCardItem'));
@@ -34,7 +34,7 @@ function PhotoList(props) {
 	if (error) {
 		return (
 			<Wrapper style={wrapperStyle} lowpadding={lowPadding.toString()} elevation={4}>
-				{loading && <FeaturedTestsSkeleton></FeaturedTestsSkeleton>}
+				{loading && <PhotosSkeleton></PhotosSkeleton>}
 				{!data && !loading && (
 					<ErrorText color="error" variant="h6" component="p">
 						No photos found
@@ -52,7 +52,7 @@ function PhotoList(props) {
 	return (
 		<Wrapper style={wrapperStyle} lowpadding={lowPadding.toString()} elevation={3}>
 			<PhotoListContainer container>
-				{loading && <FeaturedTestsSkeleton></FeaturedTestsSkeleton>}
+				{loading && <PhotosSkeleton></PhotosSkeleton>}
 				{data &&
 					data.photos.map((test, idx) => (
 						<Grid item xs={12} sm={6} key={idx}>

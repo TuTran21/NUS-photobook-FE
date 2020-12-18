@@ -10,7 +10,7 @@ const SkeletonWrapper = styled.div`
 `;
 const numberOfSkeletons = 4;
 
-function FeaturedTestsSkeleton(props) {
+function PhotosSkeleton(props) {
 	const skeletons = [];
 
 	for (var i = 0; i < numberOfSkeletons; i++) {
@@ -28,4 +28,4 @@ function FeaturedTestsSkeleton(props) {
 	);
 }
 
-export default FeaturedTestsSkeleton;
+export default PhotosSkeleton;
