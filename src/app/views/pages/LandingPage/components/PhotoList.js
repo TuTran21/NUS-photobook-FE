@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import styled from 'styled-components';
 import { Card, Grid, Typography } from '@material-ui/core';
 import { useQuery } from '@apollo/client';
-import TestQueries from 'graphql/queries/Test';
+import PhotoQueries from 'graphql/queries/Photo';
 import LoadingIndicator from 'app/views/components/common/LoadingIndicator';
 import FeaturedTestsSkeleton from '../../../components/Skeletons/FeaturedTestsSkeleton';
 import TestCardItemSkeleton from 'app/views/components/Skeletons/TestCardItemSkeleton';
@@ -18,7 +18,7 @@ const Wrapper = styled(Grid)`
 	margin-top: 50px;
 `;
 
-const TestListContainer = styled(Grid)`
+const PhotoListContainer = styled(Grid)`
 	align-items: center;
 `;
 
@@ -28,7 +28,7 @@ const ErrorText = styled(Typography)`
 
 function PhotoList(props) {
 	const { lowPadding = false, wrapperStyle } = props;
-	const getTestRes = useQuery(TestQueries.GET_TESTS, { variables: { offset: 0, limit: 4 } });
+	const getTestRes = useQuery(PhotoQueries.GET_PHOTOS, { variables: { offset: 0, limit: 4 } });
 	const { data, error, loading } = getTestRes;
 
 	if (error) {
@@ -51,17 +51,17 @@ function PhotoList(props) {
 
 	return (
 		<Wrapper style={wrapperStyle} lowpadding={lowPadding.toString()} elevation={3}>
-			<TestListContainer container>
+			<PhotoListContainer container>
 				{loading && <FeaturedTestsSkeleton></FeaturedTestsSkeleton>}
 				{data &&
-					data.tests.map((test, idx) => (
+					data.photos.map((test, idx) => (
 						<Grid item xs={12} sm={6} key={idx}>
 							<React.Suspense fallback={<TestCardItemSkeleton />}>
 								<TestCardItem testId={test.id} title={test.title} rating={test.rating}></TestCardItem>
 							</React.Suspense>
 						</Grid>
 					))}
-			</TestListContainer>
+			</PhotoListContainer>
 		</Wrapper>
 	);
 }

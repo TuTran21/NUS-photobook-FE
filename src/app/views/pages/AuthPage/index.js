@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import LoginForm from 'app/views/components/AuthForms/LoginForm';
 import RegistrationForm from 'app/views/components/AuthForms/RegistrationForm';
 import ForgotPasswordForm from 'app/views/components/AuthForms/ForgotPasswordForm';
@@ -9,7 +8,6 @@ import 'app/themes/styles/login/login-1.scss';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import UserMutations from 'graphql/mutations/User';
 import AuthQueries from 'graphql/queries/Auth';
-import { Grid } from '@material-ui/core';
 
 export default function AuthPage(props) {
 	const { dispatch, formTypeDefault = 'login' } = props;

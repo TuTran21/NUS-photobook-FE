@@ -12,7 +12,6 @@ const authReducer = (state = authState, action) =>
 	produce(state, newState => {
 		switch (action.type) {
 			case constants.LOG_IN:
-				newState.activeTest = action.payload;
 				break;
 			case constants.LOG_IN_SUCCESS:
 				newState.accessToken = action.payload.accessToken;

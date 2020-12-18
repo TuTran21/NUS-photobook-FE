@@ -25,52 +25,6 @@ export default {
 						icon: 'flaticon2-plus',
 						page: 'admin/test/create',
 					},
-					// 	{
-					// 		title: 'Utils',
-					// 		bullet: 'dot',
-					// 		submenu: [
-					// 			{
-					// 				title: 'Click Away Listener',
-					// 				bullet: 'line',
-					// 				page: 'google-material/utils/click-away-listener',
-					// 			},
-					// 			{
-					// 				title: 'Modal',
-					// 				bullet: 'line',
-					// 				page: 'google-material/utils/modal',
-					// 			},
-					// 			{
-					// 				title: 'No SSR',
-					// 				bullet: 'line',
-					// 				page: 'google-material/utils/no-ssr',
-					// 			},
-					// 			{
-					// 				title: 'Popover',
-					// 				bullet: 'line',
-					// 				page: 'google-material/utils/popover',
-					// 			},
-					// 			{
-					// 				title: 'Popper',
-					// 				bullet: 'line',
-					// 				page: 'google-material/utils/popper',
-					// 			},
-					// 			{
-					// 				title: 'Portal',
-					// 				bullet: 'line',
-					// 				page: 'google-material/utils/portal',
-					// 			},
-					// 			{
-					// 				title: 'Transitions',
-					// 				bullet: 'line',
-					// 				page: 'google-material/utils/transitions',
-					// 			},
-					// 			{
-					// 				title: 'useMediaQuery',
-					// 				bullet: 'line',
-					// 				page: 'google-material/utils/use-media-query',
-					// 			},
-					// 		],
-					// 	},
 				],
 			},
 			{

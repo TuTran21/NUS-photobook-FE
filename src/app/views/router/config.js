@@ -12,12 +12,9 @@ const ConfirmMailPage = React.lazy(() => import('app/views/pages/ConfirmEmail'))
 // Dashboard
 const DashboardPage = React.lazy(() => import('app/views/pages/Dashboard'));
 const UserManagementPage = React.lazy(() => import('app/views/pages/UsersManagementPage'));
-const BlogManagementPage = React.lazy(() => import('../pages/BlogManagementPage'));
 
 // USER
 const UserProfile = React.lazy(() => import('app/views/pages/UserProfile'));
-// BLOG
-const Blog = React.lazy(() => import('app/views/pages/Blog'));
 
 // Routes
 const routesConfig = [
@@ -107,28 +104,12 @@ const routesConfig = [
 		component: requireAdminAuth(UserManagementPage),
 	},
 	{
-		path: '/admin/blogs',
-		hasLayout: true,
-		exact: true,
-		name: 'Blog Management',
-		component: requireAdminAuth(BlogManagementPage),
-	},
-	{
 		path: '/user/:userId',
 		hasLayout: true,
 		hasHeader: true,
 		exact: true,
 		name: 'User Profile',
 		component: UserProfile,
-	},
-	{
-		path: '/blog/:id',
-		hasLayout: true,
-		hasHeader: true,
-		hasFooter: true,
-		exact: true,
-		name: 'Blog',
-		component: Blog,
 	},
 ];
 

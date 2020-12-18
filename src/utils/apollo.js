@@ -6,8 +6,6 @@ import { onError } from '@apollo/client/link/error';
 import { signOut } from './authentication';
 import history from './history';
 
-// https://online-test-tu-tran-be.herokuapp.com/graphql
-// http://localhost:5000/graphql
 const httpLink = new HttpLink({
 	uri: process.env.GRAPHQL_SERVER ? process.env.GRAPHQL_SERVER : 'http://localhost:5000/graphql',
 });

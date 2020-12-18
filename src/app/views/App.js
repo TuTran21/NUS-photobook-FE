@@ -17,21 +17,11 @@ class App extends Component {
 		}
 	}
 
-	handleCheckWindowClose = () => {
-		window.addEventListener('beforeunload', function(e) {});
-	};
-
 	handleAppMount = async token => {
 		await this.handleCheckToken(token);
-		await this.getLayout();
-		this.handleCheckWindowClose();
 	};
 
 	handleCheckToken = async token => {
-		return;
-	};
-
-	getLayout = activeLayout => {
 		return;
 	};
 

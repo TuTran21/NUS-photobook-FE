@@ -4,7 +4,7 @@
 
 import gql from 'graphql-tag';
 
-const GET_USERS = gql`
+const GET_PHOTOS = gql`
 	{
 		users {
 			id
@@ -90,4 +90,4 @@ const GET_WALL_POSTS = gql`
 	}
 `;
 
-export default { GET_USERS, GET_MY_PROFILE, GET_USER, GET_WALL_POSTS };
+export default { GET_PHOTOS, GET_MY_PROFILE, GET_USER, GET_WALL_POSTS };

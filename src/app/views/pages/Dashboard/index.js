@@ -9,7 +9,6 @@ import React, { useMemo, useEffect } from 'react';
 // import LatestUpdates from '../../widgets/LatestUpdates';
 
 // import RecentActivities from '../../widgets/RecentActivities';
-import PortletHeaderDropdown from 'app/views/components/layout/CustomDropdowns/PortletHeaderDropdown';
 import NewUsers from './NewUsers';
 
 export default function Dashboard(props) {
