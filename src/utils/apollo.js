@@ -11,9 +11,7 @@ const httpLink = new HttpLink({
 });
 
 const wsLink = new WebSocketLink({
-	uri: process.env.GRAPHQL_SERVER_SOCKET
-		? process.env.GRAPHQL_SERVER_SOCKET
-		: 'wss://online-test-tu-tran-be.herokuapp.com/graphql',
+	uri: process.env.GRAPHQL_SERVER_SOCKET ? process.env.GRAPHQL_SERVER_SOCKET : 'wss://localhost:5000/graphql',
 	options: {
 		reconnect: false,
 	},

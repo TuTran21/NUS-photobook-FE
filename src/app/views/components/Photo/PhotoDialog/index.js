@@ -51,15 +51,15 @@ const useStyles = makeStyles({
 });
 
 const PhotoDialog = props => {
-	const { open, title, content, image, handleClose } = props;
+	const { open, title, description, image, handleClose } = props;
 	const classes = useStyles();
 
 	console.log(open);
 	return (
 		<Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
 			<DialogTitle id="simple-dialog-title">{title}</DialogTitle>
-			<Image src={image} alt="Image"></Image>
-			<Typography className={classes.content}>{content}</Typography>
+			<Image src={image.url} alt="Image"></Image>
+			<Typography className={classes.content}>{description}</Typography>
 		</Dialog>
 	);
 };

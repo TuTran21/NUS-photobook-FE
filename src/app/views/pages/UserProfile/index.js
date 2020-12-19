@@ -15,9 +15,6 @@ function UserProfile(props) {
 		variables: { id: userId },
 		pollInterval: 10000,
 	});
-	const overallScoreRes = useQuery(UserQueries.GET_OVERALL_SCORE, {
-		variables: { userId: userId },
-	});
 
 	if (profileRes.loading) {
 		return <LoadingIndicator hasSpacing={true}></LoadingIndicator>;
@@ -37,12 +34,7 @@ function UserProfile(props) {
 		<Grid container>
 			<Grid item xs={12} md={4}>
 				<React.Suspense fallback={<LoadingIndicator wrapperStyle={{ marginTop: '30px' }}></LoadingIndicator>}>
-					<InfoColumn
-						user={user}
-						refetchProfile={profileRes.refetch}
-						overallScoreRes={overallScoreRes}
-						isOwner={isOwner}
-					></InfoColumn>
+					<InfoColumn user={user} refetchProfile={profileRes.refetch} isOwner={isOwner}></InfoColumn>
 				</React.Suspense>
 			</Grid>
 			<Grid item xs={12} md={8}>

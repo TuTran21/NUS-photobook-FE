@@ -18,8 +18,8 @@ const TypeSelector = props => {
 		<Grid container>
 			{typeMenu.map(item => {
 				return (
-					<Grid item xs={4} onClick={() => setType(item.name)}>
-						<Title isActive={currentType === item.name}>{item.title}</Title>
+					<Grid item xs={4} onClick={() => setType(item)}>
+						<Title isActive={currentType.name === item.name}>{item.title}</Title>
 					</Grid>
 				);
 			})}

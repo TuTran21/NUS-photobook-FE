@@ -176,9 +176,6 @@ function AvatarUploadAndEdit(props) {
 				<Typography variant="h5" className={classes.username}>
 					{displayName}
 				</Typography>
-				<Typography variant="h6" className={classes.extraInfo}>
-					Noble Warrior
-				</Typography>
 			</AvatarBlock>
 		</React.Fragment>
 	);

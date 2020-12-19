@@ -1,13 +1,13 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import styled from 'styled-components';
 import { Card, Grid, Typography } from '@material-ui/core';
-import { useQuery } from '@apollo/client';
+import { useQuery, useLazyQuery } from '@apollo/client';
 import PhotoQueries from 'graphql/queries/Photo';
 import LoadingIndicator from 'app/views/components/common/LoadingIndicator';
 import PhotosSkeleton from '../../../components/Skeletons/PhotosSkeleton';
-import TestCardItemSkeleton from 'app/views/components/Skeletons/TestCardItemSkeleton';
+import TestCardItemSkeleton from 'app/views/components/Skeletons/PhotoItemSkeleton';
 
-const TestCardItem = React.lazy(() => import('app/views/components/Photo/PhotoCardItem'));
+const PhotoCardItem = React.lazy(() => import('app/views/components/Photo/PhotoCardItem'));
 
 const Wrapper = styled(Grid)`
 	width: 100%;
@@ -27,9 +27,16 @@ const ErrorText = styled(Typography)`
 `;
 
 function PhotoList(props) {
-	const { lowPadding = false, wrapperStyle } = props;
-	const getTestRes = useQuery(PhotoQueries.GET_PHOTOS, { variables: { offset: 0, limit: 4 } });
-	const { data, error, loading } = getTestRes;
+	const { lowPadding = false, wrapperStyle, query } = props;
+	const [getPhotos, getPhotosRes] = useLazyQuery(PhotoQueries.GET_PHOTOS, {
+		fetchPolicy: 'network-only',
+		variables: { ...query, offset: 0, limit: 5 },
+	});
+	const { data, error, loading } = getPhotosRes;
+
+	useEffect(() => {
+		getPhotos();
+	}, [query]);
 
 	if (error) {
 		return (
@@ -54,10 +61,20 @@ function PhotoList(props) {
 			<PhotoListContainer container>
 				{loading && <PhotosSkeleton></PhotosSkeleton>}
 				{data &&
-					data.photos.map((test, idx) => (
+					data.photos.length > 0 &&
+					data.photos.map((photo, idx) => (
 						<Grid item xs={12} sm={6} key={idx}>
 							<React.Suspense fallback={<TestCardItemSkeleton />}>
-								<TestCardItem testId={test.id} title={test.title} rating={test.rating}></TestCardItem>
+								<PhotoCardItem
+									id={photo.id}
+									likes={photo.likes}
+									testId={photo.id}
+									title={photo.title}
+									image={photo.image}
+									description={photo.description}
+									user={photo.user}
+									createdAt={photo.createdAt}
+								></PhotoCardItem>
 							</React.Suspense>
 						</Grid>
 					))}

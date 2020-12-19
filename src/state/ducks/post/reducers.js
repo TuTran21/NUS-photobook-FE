@@ -45,15 +45,15 @@ import types from './types';
 */
 
 const initialState = {
-	postList: [],
+	photoList: [],
 };
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
-		case types.RENDER_POST_LIST:
+		case types.LOAD_PHOTO_LIST:
 			return {
 				...state,
-				postList: action.postList,
+				photoList: action.photoList,
 			};
 		default:
 			return state;

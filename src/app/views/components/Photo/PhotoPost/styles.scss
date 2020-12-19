@@ -1,0 +1,14 @@
+.image-preview {
+	text-align: center;
+	height: auto;
+	width: 90%;
+	border-left: 1px solid gray;
+	border-right: 1px solid gray;
+	border-top: 5px solid gray;
+	border-bottom: 5px solid gray;
+
+	img {
+		width: 100%;
+		height: auto;
+	}
+}

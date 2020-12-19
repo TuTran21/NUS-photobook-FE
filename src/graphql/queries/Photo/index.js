@@ -6,88 +6,48 @@ import gql from 'graphql-tag';
 
 const GET_PHOTOS = gql`
 	{
-		users {
+		photos {
 			id
-			firstName
-			lastName
-			email
-			username
-			isVerified
-			userType
-			createdAt
-			updatedAt
-			lastLogin
-		}
-	}
-`;
-
-const GET_MY_PROFILE = gql`
-	{
-		getMyProfile {
-			userId
-		}
-	}
-`;
-
-const GET_USER = gql`
-	query user($id: String) {
-		user(id: $id) {
+			title
+			image {
+				url
+			}
+			description
 			user {
-				id
-				firstName
-				lastName
-				email
 				username
 				avatar
-				phone
-				socialProfile {
-					rpg {
-						experience
-						title
-						level
-					}
-					wall {
-						posts {
-							owner {
-								avatar
-								username
-								firstName
-								lastName
-							}
-							content
-							reaction {
-								likes {
-									amount
-								}
-							}
-						}
-					}
-				}
 			}
-			isOwner
+			views
+			likes {
+				username
+				avatar
+			}
+			createdAt
 		}
 	}
 `;
 
-const GET_WALL_POSTS = gql`
-	query getWallPosts($userId: String) {
-		getWallPosts(userId: $userId) {
-			posts {
-				owner {
-					id
-					username
-					avatar
-				}
-				content
-				reaction {
-					likes {
-						amount
-					}
-				}
-				createdAt
+const GET_PHOTO = gql`
+	query photo($id: String) {
+		photo(id: $id) {
+			id
+			title
+			image {
+				url
 			}
+			description
+			user {
+				username
+				avatar
+			}
+			views
+			likes {
+				username
+				avatar
+			}
+			createdAt
 		}
 	}
 `;
 
-export default { GET_PHOTOS, GET_MY_PROFILE, GET_USER, GET_WALL_POSTS };
+export default { GET_PHOTOS, GET_PHOTO };

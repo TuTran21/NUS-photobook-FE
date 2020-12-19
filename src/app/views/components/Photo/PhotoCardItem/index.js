@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import Theme from 'app/themes/styles';
 import PhotoDialog from '../PhotoDialog';
 import { Favorite } from '@material-ui/icons';
+import moment from 'moment';
+import config from 'global-config';
 const Image = styled.img`
 	width: 100%;
 	height: auto;
@@ -67,54 +69,32 @@ const Date = styled.em`
 `;
 
 function TestCardItem(props) {
-	const { title, rating, image, content } = props;
-	const [photoDialogOpen, setPhotoDialogOpen] = React.useState(false);
+	const { id, title, rating, image, description, user, likes, createdAt } = props;
+	const history = useHistory();
 
 	const handleOpenDialog = () => {
-		setPhotoDialogOpen(true);
-	};
-
-	const handleCloseDialog = () => {
-		setPhotoDialogOpen(false);
+		history.push(`/?view=${id}`);
 	};
 
 	return (
 		<Wrapper elevation={2}>
-			<Image
-				onClick={handleOpenDialog}
-				src="https://ieltsonlinetests.com/sites/default/files/styles/latest_collection/public/2020-01/MTjul2020%403x.png"
-				alt="Test Image"
-			></Image>
+			<Image onClick={handleOpenDialog} src={image.url} alt={`Photo by ${user.username}`}></Image>
 			<InfoWrapper onClick={handleOpenDialog}>
 				<UserInfoWrapper></UserInfoWrapper>
 				<Title variant="h6" component="p">
 					{title}
 				</Title>
-				<Content>
-					{content}Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-					been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-					of type and scrambled it to make a type specimen book. It has survived not only five centuries, but
-					also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
-					the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently
-					with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-				</Content>
+				<Content>{description}</Content>
 				<RatingWrapper>
 					<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 						<IconButton color="default">
 							<Favorite></Favorite>
 						</IconButton>
-						<VoteAmount>({rating.voteAmount} votes)</VoteAmount>
+						<VoteAmount>({likes.length})</VoteAmount>
 					</div>
-					<Date>4th July, 2020</Date>
+					<Date>{moment(createdAt).format(config.DATE_FORMAT)}</Date>
 				</RatingWrapper>
 			</InfoWrapper>
-			<PhotoDialog
-				open={photoDialogOpen}
-				title={title}
-				image={image}
-				content={content}
-				handleClose={handleCloseDialog}
-			></PhotoDialog>
 		</Wrapper>
 	);
 }

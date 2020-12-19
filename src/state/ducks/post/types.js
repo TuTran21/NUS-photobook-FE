@@ -4,10 +4,8 @@ You can use any convention you wish here, but the name should remain UPPER_SNAKE
 
 */
 
-const LOAD_POST_LIST = 'app_main/post/LOAD_POST_LIST';
-const RENDER_POST_LIST = 'app_main/post/RENDER_POST_LIST';
+const LOAD_PHOTO_LIST = 'app_main/photo/LOAD_PHOTO_LIST';
 
 export default {
-	LOAD_POST_LIST,
-	RENDER_POST_LIST,
+	LOAD_PHOTO_LIST,
 };

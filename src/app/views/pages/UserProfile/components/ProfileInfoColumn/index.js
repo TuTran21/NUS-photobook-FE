@@ -11,7 +11,7 @@ const AvatarBlock = styled.div`
 `;
 
 function InfoColumn(props) {
-	const { user, overallScoreRes, isOwner, refetchProfile } = props;
+	const { user, isOwner, refetchProfile } = props;
 	return (
 		<React.Fragment>
 			<AvatarUploadAndEdit refetchProfile={refetchProfile} isOwner={isOwner} user={user}></AvatarUploadAndEdit>

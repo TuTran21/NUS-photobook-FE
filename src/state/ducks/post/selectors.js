@@ -6,8 +6,8 @@ These functions make sense when you have a more complex app state.
 
 */
 
-const checkIfUserIsLoggedIn = state => {
-	return state.user !== null;
+const photoList = state => {
+	return state.photoList !== null;
 };
 
-export default { checkIfUserIsLoggedIn };
+export default { photoList };

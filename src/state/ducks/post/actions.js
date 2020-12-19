@@ -7,12 +7,12 @@ HINT: Always use functions for consistency, don't export plain objects
 
 import types from './types';
 
-const loadPostList = () => {
+const loadPhotoList = () => {
 	return {
-		type: types.LOAD_POST_LIST,
+		type: types.LOAD_PHOTO_LIST,
 	};
 };
 
 export default {
-	loadPostList,
+	loadPhotoList,
 };
