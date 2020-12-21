@@ -52,11 +52,6 @@ const useStyles = makeStyles({
 const PhotoDialog = props => {
 	const { id, open, title, description, image, handleClose, isOwner, isPublic } = props;
 	const [edit, setEdit] = React.useState(false);
-	const [editForm, setEditForm] = React.useState({
-		title: title,
-		description: description,
-		url: image.url,
-	});
 	const classes = useStyles();
 
 	return (

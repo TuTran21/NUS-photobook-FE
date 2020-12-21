@@ -30,6 +30,7 @@ export default function LandingPage(props) {
 
 	const [getPhoto, getPhotoRes] = useLazyQuery(PhotoQueries.GET_PHOTO, {
 		variables: { id: photoId },
+		fetchPolicy: 'network-only',
 		onCompleted: res => {
 			if (!res.photo) {
 				history.push('/');

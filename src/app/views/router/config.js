@@ -12,7 +12,7 @@ const ConfirmMailPage = React.lazy(() => import('app/views/pages/ConfirmEmail'))
 // Dashboard
 const DashboardPage = React.lazy(() => import('app/views/pages/Dashboard'));
 const UserManagementPage = React.lazy(() => import('app/views/pages/UsersManagementPage'));
-
+const PhotoManagementPage = React.lazy(() => import('app/views/pages/PhotoManagementPage'));
 // USER
 const UserProfile = React.lazy(() => import('app/views/pages/UserProfile'));
 
@@ -102,6 +102,14 @@ const routesConfig = [
 		exact: true,
 		name: 'User Management',
 		component: requireAdminAuth(UserManagementPage),
+	},
+
+	{
+		path: '/admin/photos',
+		hasLayout: true,
+		exact: true,
+		name: 'Photo Management',
+		component: requireAdminAuth(PhotoManagementPage),
 	},
 	{
 		path: '/user/:userId',

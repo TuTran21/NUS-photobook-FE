@@ -22,7 +22,17 @@ const UPDATE_PHOTO = gql`
 	}
 `;
 
+const ADMIN_UPDATE_PHOTO = gql`
+	mutation updatePhoto($photo: UpdatePhotoInput) {
+		updatePhoto(photo: $photo) {
+			status
+			message
+		}
+	}
+`;
+
 export default {
 	CREATE_PHOTO,
 	UPDATE_PHOTO,
+	ADMIN_UPDATE_PHOTO,
 };
