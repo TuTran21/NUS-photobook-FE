@@ -64,6 +64,9 @@ export default function LandingPage(props) {
 			</Grid>
 			{viewPhoto && (
 				<PhotoDialog
+					id={viewPhoto.id}
+					isPublic={viewPhoto.isPublic}
+					isOwner={viewPhoto.isOwner}
 					open={photoDialogOpen}
 					title={viewPhoto.title}
 					image={viewPhoto.image}

@@ -28,6 +28,7 @@ const ErrorText = styled(Typography)`
 
 function PhotoList(props) {
 	const { lowPadding = false, wrapperStyle, query } = props;
+
 	const [getPhotos, getPhotosRes] = useLazyQuery(PhotoQueries.GET_PHOTOS, {
 		fetchPolicy: 'network-only',
 		variables: { ...query, offset: 0, limit: 5 },

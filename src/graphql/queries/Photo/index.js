@@ -5,8 +5,8 @@
 import gql from 'graphql-tag';
 
 const GET_PHOTOS = gql`
-	{
-		photos {
+	query photos($offset: Int, $limit: Int, $isPublic: Boolean, $isOwner: Boolean) {
+		photos(offset: $offset, limit: $limit, isPublic: $isPublic, isOwner: $isOwner) {
 			id
 			title
 			image {
@@ -46,6 +46,8 @@ const GET_PHOTO = gql`
 				avatar
 			}
 			createdAt
+			isOwner
+			isPublic
 		}
 	}
 `;

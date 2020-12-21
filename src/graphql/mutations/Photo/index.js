@@ -13,6 +13,16 @@ const CREATE_PHOTO = gql`
 	}
 `;
 
+const UPDATE_PHOTO = gql`
+	mutation updatePhoto($photo: UpdatePhotoInput) {
+		updatePhoto(photo: $photo) {
+			status
+			message
+		}
+	}
+`;
+
 export default {
 	CREATE_PHOTO,
+	UPDATE_PHOTO,
 };

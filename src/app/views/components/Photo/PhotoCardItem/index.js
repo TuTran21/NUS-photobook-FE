@@ -68,7 +68,7 @@ const Date = styled.em`
 	line-height: 1.5;
 `;
 
-function TestCardItem(props) {
+function PhotoCardItem(props) {
 	const { id, title, rating, image, description, user, likes, createdAt } = props;
 	const history = useHistory();
 
@@ -99,4 +99,4 @@ function TestCardItem(props) {
 	);
 }
 
-export default TestCardItem;
+export default PhotoCardItem;

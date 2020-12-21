@@ -18,9 +18,10 @@ const SubmitButton = styled(Button)`
 `;
 
 const PhotoPost = props => {
-	const [title, setTitle] = React.useState('');
-	const [isPublic, setIsPublic] = React.useState(true);
-	const [description, setDescription] = React.useState('');
+	const { id, photoTitle = '', photoDescription = '', isPhotoPublic = true, url = '', isEdit = false } = props;
+	const [title, setTitle] = React.useState(photoTitle);
+	const [isPublic, setIsPublic] = React.useState(isPhotoPublic);
+	const [description, setDescription] = React.useState(photoDescription);
 	const { intl } = props;
 	const [submitPhoto, submitPhotoRes] = useMutation(PhotoMutations.CREATE_PHOTO, {
 		onCompleted: () =>
@@ -51,18 +52,52 @@ const PhotoPost = props => {
 			),
 	});
 
+	const [updatePhoto, updatePhotoRes] = useMutation(PhotoMutations.UPDATE_PHOTO, {
+		onCompleted: () =>
+			props.enqueueSnackbar(
+				intl.formatMessage({
+					id: 'PHOTO.UPDATE.SUCCESS',
+				}),
+				{
+					variant: 'success',
+					anchorOrigin: {
+						vertical: 'top',
+						horizontal: 'right',
+					},
+				},
+			),
+		onError: () =>
+			props.enqueueSnackbar(
+				intl.formatMessage({
+					id: 'TRY_AGAIN_LATER',
+				}),
+				{
+					variant: 'error',
+					anchorOrigin: {
+						vertical: 'top',
+						horizontal: 'right',
+					},
+				},
+			),
+	});
+
 	const [photo, setPhoto] = React.useState({
-		file: '',
-		imagePreviewUrl: '',
+		url: url,
 	});
 
 	const handleSubmit = () => {
 		const newPhoto = {
-			image: photo.imagePreviewUrl,
+			id: id,
+			image: photo.url,
 			title: title,
 			isPublic: isPublic,
 			description: description,
 		};
+		console.log(newPhoto);
+		if (isEdit) {
+			return updatePhoto({ variables: { photo: newPhoto } });
+		}
+
 		submitPhoto({ variables: { photo: newPhoto } });
 	};
 
@@ -86,24 +121,27 @@ const PhotoPost = props => {
 
 		reader.onloadend = () => {
 			setPhoto({
-				file: file,
-				imagePreviewUrl: reader.result,
+				url: reader.result,
 			});
 		};
 
 		reader.readAsDataURL(file);
 	};
 
+	const dialogTitle = isEdit ? 'PHOTO.UPDATE.TITLE' : 'PHOTO.CREATE.TITLE';
+
 	return (
 		<Wrapper>
 			<Typography variant="h5" style={{ marginBottom: '20px' }}>
-				Photo post
+				{intl.formatMessage({
+					id: dialogTitle,
+				})}
 			</Typography>
 			<Grid container spacing={0}>
 				<Grid item xs={12} md={4}>
 					<input className="fileInput" type="file" onChange={e => handleImageChange(e)} />
-					{photo.imagePreviewUrl && <img className="image-preview" src={photo.imagePreviewUrl} />}
-					{!photo.imagePreviewUrl && <p>Please select and image for Preview</p>}
+					{photo.url && <img className="image-preview" src={photo.url} />}
+					{!photo.url && <p>Please select and image for Preview</p>}
 				</Grid>
 
 				<Grid item xs={12} md={8}>

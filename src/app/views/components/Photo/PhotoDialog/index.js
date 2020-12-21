@@ -1,18 +1,17 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import { Typography, Card, Dialog, DialogTitle } from '@material-ui/core';
+import { Typography, Card, Dialog, DialogTitle, Button } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import { roundNumberToTwoDecimals } from 'utils/utils';
 import { useHistory } from 'react-router-dom';
 import Theme from 'app/themes/styles';
 import { makeStyles } from '@material-ui/core/styles';
+import PhotoPost from '../PhotoPost';
 
 const Image = styled.img`
 	width: 100%;
 	height: auto;
-	max-height: 250px;
-	max-width: 250px;
 	border-radius: 5px;
 `;
 
@@ -51,15 +50,40 @@ const useStyles = makeStyles({
 });
 
 const PhotoDialog = props => {
-	const { open, title, description, image, handleClose } = props;
+	const { id, open, title, description, image, handleClose, isOwner, isPublic } = props;
+	const [edit, setEdit] = React.useState(false);
+	const [editForm, setEditForm] = React.useState({
+		title: title,
+		description: description,
+		url: image.url,
+	});
 	const classes = useStyles();
 
-	console.log(open);
 	return (
 		<Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-			<DialogTitle id="simple-dialog-title">{title}</DialogTitle>
-			<Image src={image.url} alt="Image"></Image>
-			<Typography className={classes.content}>{description}</Typography>
+			{isOwner && (
+				<Button color="primary" variant="contained" onClick={() => setEdit(!edit)}>
+					{edit ? `Cancel` : `Edit`}
+				</Button>
+			)}
+			{!edit && (
+				<>
+					<DialogTitle id="simple-dialog-title">{title}</DialogTitle>
+					<Image src={image.url} alt="Image"></Image>
+					<Typography className={classes.content}>{description}</Typography>
+				</>
+			)}
+
+			{edit && (
+				<PhotoPost
+					id={id}
+					isEdit={true}
+					photoTitle={title}
+					url={image}
+					isPhotoPublic={isPublic}
+					photoDescription={description}
+				></PhotoPost>
+			)}
 		</Dialog>
 	);
 };

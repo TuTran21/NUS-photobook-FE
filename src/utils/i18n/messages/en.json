@@ -65,7 +65,10 @@
 	"AUTH.SESSION.EXPIRED": "Your session has expired, please login again to proceed",
 	"AUTH.SESSION.FAILED": "We cannot log you in due to some errors, please login again.",
 
+	"PHOTO.CREATE.TITLE": "Photo Post",
+	"PHOTO.UPDATE.TITLE": "Photo Update",
 	"PHOTO.CREATE.SUCCESS": "Photo uploaded successfully",
+	"PHOTO.UPDATE.SUCCESS": "Photo updated successfully",
 	"PHOTO.DELETE.SUCCESS": "Photo deleted successfully",
 
 	"MANAGE.BLOGS.CREATE.SUCCESS": "Blog successfully created.",
